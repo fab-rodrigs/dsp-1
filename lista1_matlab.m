@@ -44,3 +44,11 @@ stem(x,n)
 
 %% 2) Seja x(n)={2,4,-3,1,-5,4,7} Gere e plote as amostras (use a função stem) das
 % seguintes sequências:
+
+%% x1(n) = 2x(n-3)+3x(n+4)-x(n)
+
+%% x2(n) = 4x(4+n)+5x(n+5)+2x(n)
+
+%% x3(n) = x(n+3)x(n-2)+x(1-n)x(n+1)
+
+%% x4(n) = 2e^0.5x(n)+cos(0.1?n)x(n+2), -10<=n<=10
