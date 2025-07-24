@@ -12,7 +12,7 @@ a1 = 0.9;
 b0 = 0.1;
 b = [b0];
 a = [1 -a1];
-temp_filtrada = filter(b, a, temp_sensor);
+temp_filtrada = filter(b, a, temp_sensor); % filtro
 
 %% 3. PLOTAR
 figure;

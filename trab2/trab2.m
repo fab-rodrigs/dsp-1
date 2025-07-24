@@ -40,15 +40,9 @@ hd(N/2+1) = wc/pi;  % Corrige divisão por zero
 
 %% Sinal de entrada: seno de 300 Hz (passa) + 800 Hz (deve ser atenuado)
 t = 0:1/Fs:0.05;  % 50 ms
-x = sin(2*pi*300*t) + sin(2*pi*800*t);
+x = 0.6*sin(2*pi*300*t) + 0.3*sin(2*pi*1000*t) + 0.2*randn(size(t));
 
-%% Lista de janelas
-janelas = {
-    'Retangular', rectwin(N+1);
-};
-
-nome = janelas{1, 1};
-w = janelas{1, 2};
+w = rectwin(N + 1);
 h = hd .* w';  % filtro final
 
 % Filtra o sinal
@@ -57,37 +51,32 @@ y = filter(h, 1, x);
 % Resposta em frequência
 [Hf, f] = freqz(h, 1, 1024, Fs);
 
-figure('Name', ['Filtro FIR - Janela ', nome], 'NumberTitle', 'off');
-
-% Subplot 1: Forma da janela
+% Janela
 subplot(2,2,1);
-plot(w, 'LineWidth', 1.2);
-title(['Janela ', nome]);
-xlabel('Amostra'); ylabel('Amplitude'); grid on;
+stem(w);
+title('Janela Retangular');
 
-% Subplot 2: Resposta ao impulso
+% Resposta ao impulso
 subplot(2,2,2);
-stem(h, 'filled');
-title('Resposta ao impulso h[n]');
-xlabel('n'); ylabel('Amplitude'); grid on;
+stem(h);
+title('Resposta ao Impulso');
 
-% Subplot 3: Resposta em frequência
+% Resposta em frequência
+[Hf, f] = freqz(h, 1, 1024, Fs);
 subplot(2,2,3);
 plot(f, 20*log10(abs(Hf)));
+title('Resposta em Frequência (dB)');
+xlabel('Hz'); ylabel('Magnitude (dB)');
 grid on;
-axis([0 Fs/2 -100 5]);
-title('Resposta em frequência do filtro');
-xlabel('Frequência (Hz)');
-ylabel('Magnitude (dB)');
 
-% Subplot 4: Sinal de entrada e saída
+% Sinal de entrada e saída
 subplot(2,2,4);
 plot(t, x, '--k'); hold on;
 plot(t, y, 'b');
-title('Sinal filtrado vs. entrada');
+title('Entrada vs Saída');
+legend('Entrada', 'Filtrado');
 xlabel('Tempo (s)');
-ylabel('Amplitude');
-legend('Entrada', 'Saída filtrada');
+
 grid on;
 
 
