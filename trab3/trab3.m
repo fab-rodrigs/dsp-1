@@ -1,16 +1,13 @@
-% Especificações do Projeto para o Filtro Elíptico Passa-Baixa
-% Frequência de Passagem (Omega_p): 0.25*pi
-% Frequência de Rejeição (Omega_s): 0.35*pi
-% Ripple na Banda de Passagem (Rp): 1 dB
-% Atenuação Mínima na Banda de Rejeição (As): 40 dB
+% Filtro Elíptico Passa-Baixa
 
-% Definindo os parâmetros do filtro
-Omega_p = 0.25 * pi; % Frequência de Passagem em rad/amostra
-Omega_s = 0.35 * pi; % Frequência de Rejeição em rad/amostra
-Rp = 1;              % Ripple na banda de passagem em dB
-As = 40;             % Atenuação mínima na banda de rejeição em dB
 
-% Normalizando as frequências para o range [0, 1] (onde 1 corresponde a pi rad/amostra)
+% parâmetros do filtro
+Omega_p = 0.25 * pi; % frequência de passagem (rad/amostra)
+Omega_s = 0.35 * pi; % frequência de rejeição (rad/amostra)
+Rp = 1;              % ripple banda passagem (dB)
+As = 40;             % atenuação banda de rejeição (dB)
+
+% normalizando das frequências(onde 1 corresponde a pi rad/amostra)
 Wp = Omega_p / pi;
 Ws = Omega_s / pi;
 
@@ -30,7 +27,7 @@ fprintf('Frequência de corte normalizada (Wn): %f * pi rad/amostra\n', Wn);
 % 3. Plotar as figuras
 
 % Vetor de frequências para plotagem (de 0 a pi rad/amostra)
-[H, w] = freqz(b, a, 1024, 'whole'); % 1024 pontos, 'whole' para 0 a 2*pi, vamos usar de 0 a pi
+[H, w] = freqz(b, a, 1024, 'whole'); % 1024 pontos, 'whole' para 0 a pi
 w_norm = w / pi; % Normaliza a frequência para unidades de pi rad/amostra
 
 % Figura 1: Magnitude Linear
